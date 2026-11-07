@@ -35,6 +35,14 @@ transition:clip-path 1s cubic-bezier(.7,0,.2,1);clip-path:inset(0 0 0 0)}
 #bar{position:fixed;left:0;top:0;height:3px;width:calc(var(--g,0)*100%);background:var(--am);z-index:60}
 #hud{position:fixed;left:14px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:40;font-size:12px;color:var(--mute);background:rgba(26,28,32,.8);backdrop-filter:blur(6px);padding:6px 10px;border-radius:6px;pointer-events:none}
 #hud b{color:var(--cy);font-weight:600}
+/* scroll guide */
+#guide{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:45;display:flex;align-items:center;gap:9px;padding:8px 10px 8px 8px;border:1px solid rgba(127,212,255,.55);border-radius:999px;background:rgba(12,30,46,.86);color:var(--ink);font:inherit;text-align:left;cursor:pointer;box-shadow:0 8px 30px rgba(0,0,0,.24);transition:transform .25s,border-color .25s,background .25s}
+#guide:hover,#guide:focus-visible{transform:translateY(-4px);border-color:var(--am);background:#10283a;outline:none}
+.guide-orb{width:32px;height:32px;position:relative;display:block;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff 0 5%,var(--cy) 7% 22%,#24546f 24% 58%,#0b1720 60%);box-shadow:0 0 15px rgba(127,212,255,.65);animation:float 3s ease-in-out infinite}
+.guide-orb i{position:absolute;width:4px;height:6px;border-radius:50%;background:#10212c;top:11px}.guide-orb i:first-child{left:10px}.guide-orb i:last-child{right:10px}
+.guide-copy{display:grid;line-height:1.05}.guide-copy b{font:800 12px 'Archivo',sans-serif;color:var(--cy)}.guide-copy small{font-size:10px;color:var(--mute);margin-top:3px}
+.guide-arrow{font-size:17px;color:var(--am);animation:bounce 1.8s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-4px) rotate(5deg)}}@keyframes bounce{50%{transform:translateY(3px)}}
 /* hero */
 .hero{height:400vh;position:relative;padding:0}
 .pin{position:sticky;top:0;height:100svh;overflow:hidden;background:#0C1E2E}
@@ -86,6 +94,45 @@ transition:clip-path 1s cubic-bezier(.7,0,.2,1);clip-path:inset(0 0 0 0)}
 .gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
 .t{--p:0;position:relative;aspect-ratio:16/9;background:var(--panel);outline:1px dashed rgba(127,212,255,.45);overflow:hidden;cursor:zoom-in}
 @media(max-width:760px){.grid2{grid-template-columns:1fr}.gal{grid-template-columns:1fr 1fr;gap:10px}}
+@media(max-width:760px){
+  body{font-size:16px;background-size:34px 34px}
+  section{padding:10vh 5vw}
+  #nav{gap:7px;padding:calc(8px + env(safe-area-inset-top,0px)) 5vw 8px}
+  #nav b{font-size:14px;margin-right:3px}
+  #nav a{font-size:12px;padding:6px 10px}
+  #hud{left:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));font-size:10px;padding:5px 8px}
+  #guide{right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));padding:6px 8px 6px 6px}
+  .guide-orb{width:28px;height:28px}.guide-orb i{top:9px}.guide-orb i:first-child{left:9px}.guide-orb i:last-child{right:9px}
+  .guide-copy small{font-size:9px}
+  .hero{height:250vh}
+  .pin{height:100svh}
+  .hl{left:5vw;right:5vw;bottom:12vh}
+  .hl h1{font-size:clamp(3.2rem,18vw,6rem);line-height:.88}
+  .hl p{font-size:14px;line-height:1.4;max-width:28ch;margin-top:12px}
+  #stage{left:5vw;top:calc(70px + env(safe-area-inset-top,0px));font-size:12px}
+  #stage small{font-size:10px;max-width:23ch}
+  .intro h2{font-size:clamp(2rem,10vw,3rem);margin-bottom:4vh}
+  .idx{grid-template-columns:1fr 1fr;gap:10px}
+  .ic{aspect-ratio:1/1.18}
+  .ic span{padding:10px;font-size:11px;line-height:1.35}
+  .ic b{font-size:1rem;line-height:1.05;margin-bottom:4px}
+  .ic em{font-size:11px}
+  .ch{margin-bottom:5vh}.ch h2{font-size:clamp(2.4rem,13vw,4rem);line-height:.9}
+  .ch p{font-size:1rem;line-height:1.45;margin-top:12px}
+  .cnt{font-size:12px}
+  .b{margin-bottom:7vh}.b figure{aspect-ratio:4/3;outline-offset:4px}
+  .b figcaption{margin-top:14px}.b h3{font-size:1.5rem}.b figcaption p{font-size:14px;line-height:1.45}
+  .sub{margin:5vh 0 2vh}.sub small{font-size:12px}
+  .gal{gap:8px}.t{aspect-ratio:1/1}
+  .blk{margin-bottom:7vh}.tl{padding-left:26px}.tl article{margin-bottom:4vh}
+  .tl article::before{left:-27px}.tl::before{left:4px}
+  .tools{gap:8px}.tools span{font-size:1rem;padding:11px 14px}
+  .facts{grid-template-columns:1fr 1fr;gap:16px;font-size:14px}
+  .contact h2{font-size:clamp(3rem,15vw,6rem)}
+  .contact a{font-size:1.05rem;padding:12px 0}
+  footer{padding:4vh 5vw 12vh}
+}
+@media(max-width:380px){.guide-copy{display:none}.idx{gap:8px}.ic b{font-size:.9rem}}
 /* resume */
 #resume h2.big{font-size:clamp(2.4rem,8vw,6rem);margin-bottom:8vh}
 .blk{margin-bottom:10vh}

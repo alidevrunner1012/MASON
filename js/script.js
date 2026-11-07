@@ -2,6 +2,7 @@
 var $=function(s){return document.querySelector(s)},$$=function(s){return [].slice.call(document.querySelectorAll(s))};
 var root=document.documentElement;root.classList.add('lock');
 var app=$('#app'),land=$('#land'),started=false;
+var guide=$('#guide');
 function enter(){
   if(started)return;started=true;
   app.hidden=false;$$('img[data-i]').forEach(function(i){i.src=IMG[i.dataset.i]});
@@ -10,6 +11,11 @@ function enter(){
   frame();
 }
 $('#enter').onclick=enter;$('#skip').onclick=enter;
+guide.onclick=function(){
+  var targets=['#exterior','#house','#commercial','#retail','#exhibition','#product','#resume','#contact'];
+  var current=targets.findIndex(function(id){return $(id).getBoundingClientRect().top>innerHeight*.35});
+  $(targets[current<0?targets.length-1:current]).scrollIntoView({behavior:'smooth'});
+};
 addEventListener('keydown',function(e){if(!started&&e.key==='Enter')enter();if(e.key==='Escape')$('#lb').classList.remove('on')});
 /* lightbox */
 var lb=$('#lb');
@@ -31,6 +37,7 @@ function frame(){
   var inHero=y<hero.offsetHeight-vh*.3,act=-1;
   secs.forEach(function(e,i){if(e.getBoundingClientRect().top<vh*.4)act=i});
   $('#mode').textContent=inHero?names[k][0]:(act>=0?links[act].textContent:'Shaded');
+  if(guide)guide.querySelector('.guide-copy small').textContent=inHero?'Scroll to build':'Keep exploring';
   $('#fr').textContent=('000'+Math.round(cl(y/max)*1000)).slice(-4);
   links.forEach(function(a,i){a.classList.toggle('on',i===act)});
   sc.forEach(function(e){
